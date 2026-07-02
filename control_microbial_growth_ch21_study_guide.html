@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 21: Control of Microbial Growth - Study Guide</title>
+<style>
+:root {
+  --navy: #1B3A5C;
+  --navy2: #3A6491;
+  --crimson: #A3393A;
+  --crimson-dark: #832C2C;
+  --gold: #D4A24E;
+  --gold-dark: #B8853A;
+  --cream: #F2ECE0;
+  --bg: #F7F5F0;
+  --card: #FFFFFF;
+  --text: #1E2A30;
+  --text-light: #5E6E76;
+  --border: #E3DDCC;
+  --success-bg: #E7EFE9;
+  --success-text: #34543F;
+  --error-bg: #FAEBE5;
+  --error-text: #8C3B22;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --navy: #14304D;
+    --navy2: #5A8AB8;
+    --crimson: #C2605F;
+    --crimson-dark: #A3393A;
+    --gold: #E5BD7E;
+    --gold-dark: #D4A24E;
+    --cream: #2A2620;
+    --bg: #16191B;
+    --card: #21262A;
+    --text: #F0ECE4;
+    --text-light: #C2C8CC;
+    --border: #3A4146;
+    --success-bg: #20302A;
+    --success-text: #A9D4B8;
+    --error-bg: #36241D;
+    --error-text: #F0B8A0;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--navy);
+  color: #fff;
+  padding: 22px 28px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 6px;
+  font-size: 1.7rem;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  margin: 0;
+  color: var(--cream);
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--gold);
+  color: #1E2A30;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--cream);
+  border-bottom: 2px solid var(--gold);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.tab-bar button {
+  flex: 1 1 auto;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  padding: 12px 8px;
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tab-bar button:hover {
+  background: rgba(212,162,78,0.18);
+}
+
+.tab-bar button.active {
+  background: var(--gold);
+  color: #fff;
+  border-bottom: 3px solid var(--gold-dark);
+}
+
+.tab-content {
+  display: none;
+  padding: 24px 28px 44px;
+  max-width: 980px;
+  margin: 0 auto;
+  animation: fadeIn 0.25s ease-in;
+}
+
+.tab-content.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  color: var(--navy);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 8px;
+  font-size: 1.45rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  h2 { color: var(--navy2); }
+}
+
+h3 {
+  color: var(--crimson-dark);
+  font-size: 1.12rem;
+  margin-top: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  h3 { color: var(--gold); }
+}
+
+.section-intro {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 18px;
+  font-family: Arial, sans-serif;
+}
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.stat-card {
+  flex: 1 1 150px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.stat-card .num {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: var(--navy);
+  font-family: Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .stat-card .num { color: var(--navy2); }
+}
+
+.stat-card .lbl {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  font-family: Arial, sans-serif;
+  margin-top: 4px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.card h4 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card h4 { color: var(--navy2); }
+}
+
+.alert {
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.92rem;
+}
+
+.alert.clinical {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--navy2);
+}
+
+.alert.warning {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--crimson);
+}
+
+.alert strong:first-child { display: block; margin-bottom: 4px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+tr:nth-child(even) td {
+  background: rgba(212,162,78,0.07);
+}
+
+.accordion {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.accordion-header {
+  background: var(--card);
+  padding: 12px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  color: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .accordion-header { color: var(--navy2); }
+}
+
+.accordion-header:after {
+  content: "+";
+  font-size: 1.2rem;
+  color: var(--crimson);
+}
+
+.accordion-header.open:after { content: "\2212"; }
+
+.accordion-body {
+  display: none;
+  padding: 4px 18px 16px;
+  font-family: Arial, sans-serif;
+  font-size: 0.92rem;
+}
+
+.accordion-body.open { display: block; }
+
+ul.detail-list { margin: 8px 0; padding-left: 22px; font-family: Arial, sans-serif; font-size: 0.92rem; }
+ul.detail-list li { margin-bottom: 6px; }
+
+/* ===== Flashcards ===== */
+.flash-controls {
+  font-family: Arial, sans-serif;
+  margin-bottom: 14px;
+}
+
+.flash-controls select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.flash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.flashcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-height: 110px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: background 0.15s;
+}
+
+.flashcard:hover { background: rgba(212,162,78,0.10); }
+
+.flashcard .term {
+  font-weight: bold;
+  font-size: 1.0rem;
+  color: var(--navy);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flashcard .term { color: var(--navy2); }
+}
+
+.flashcard .def {
+  display: none;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.flashcard.flipped .term { display: none; }
+.flashcard.flipped .def { display: block; }
+.flashcard.flipped { background: rgba(163,57,58,0.08); }
+
+/* ===== Quiz ===== */
+.quiz-q {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  font-family: Arial, sans-serif;
+}
+
+.quiz-q p.question { font-weight: bold; margin-top: 0; font-size: 0.97rem; }
+
+.quiz-q label {
+  display: block;
+  padding: 8px 10px;
+  margin: 6px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+}
+
+.quiz-q label:hover { background: rgba(212,162,78,0.10); }
+
+.quiz-feedback {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: var(--success-bg); color: var(--success-text); }
+.quiz-feedback.no { background: var(--error-bg); color: var(--error-text); }
+
+#quiz-score {
+  text-align: center;
+  padding: 16px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--navy);
+  display: none;
+  font-family: Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  #quiz-score { color: var(--navy2); }
+}
+
+#submit-quiz {
+  display: block;
+  margin: 18px auto 0;
+  background: var(--crimson-dark);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 11px 36px;
+  font-size: 0.95rem;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+}
+
+#submit-quiz:hover { background: var(--crimson); }
+
+.objectives-list { font-family: Arial, sans-serif; font-size: 0.95rem; }
+.objectives-list li { margin-bottom: 8px; }
+
+footer {
+  text-align: center;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Microbiology for Surgical Technologists &mdash; 3rd Edition</h1>
+  <p>Rodriguez &bull; Chapter 21: Control of Microbial Growth</p>
+  <span class="badge">CST Board Prep &nbsp;&bull;&nbsp; ATA College</span>
+</header>
+<div class="tab-bar">
+  <button class="active" onclick="showTab('overview',this)">Overview</button>
+  <button onclick="showTab('firstsecond',this)">1st &amp; 2nd Lines of Defense</button>
+  <button onclick="showTab('immunity',this)">Immunity &amp; Vaccines</button>
+  <button onclick="showTab('components',this)">Immune System Components</button>
+  <button onclick="showTab('hypersensitivity',this)">Hypersensitivity &amp; Autoimmune</button>
+  <button onclick="showTab('herdbehavior',this)">Herd Immunity &amp; Behavior</button>
+  <button onclick="showTab('surgical',this)">Surgical Infection Control</button>
+  <button onclick="showTab('terms',this)">Key Terms</button>
+  <button onclick="showTab('quiz',this)">Quiz</button>
+</div>
+
+
+<div id="overview" class="tab-content active">
+  <h2>Chapter Overview &amp; Clinical Significance</h2>
+  <p class="section-intro">Chapter 21 covers two BIG topics: how the human body defends itself against pathogens (the three lines of defense, immunity, hypersensitivity reactions, and herd immunity), and how the surgical team controls microbial growth in the environment of care through decontamination, disinfection, and sterilization.</p>
+
+  <div class="alert warning">
+    <strong>CST Clinical Significance</strong>
+    Decontamination, disinfection, and sterilization are rarely favorite topics of surgical technology students, or even some instructors, but no matter how tedious the material may seem, the truth is that failures of these processes are often implicated in root cause analyses of incidents of surgical site infections (SSIs) or devastating healthcare-associated infections (HAIs) such as carbapenem-resistant Enterococcus (CRE), methicillin-resistant Staphylococcus aureus (MRSA), vancomycin-resistant Enterococcus (VRE), or Clostridioides difficile (C. diff).
+  </div>
+
+  <div class="alert clinical">
+    <strong>Everyone's Responsibility</strong>
+    Eliminating HAIs and assuring that surgical instruments are properly disinfected or sterilized prior to use on patients are the responsibilities of everyone working in the surgical environment of care. Without taking the time to understand the mechanisms of infection and transmission, mistakes will be made routinely and remain unrecognized until it is too late. Surgical technologists must be vigilant in following infection control practices and maintaining the highest levels of performance of aseptic and sterile techniques, even if studying the basics isn't very &ldquo;flashy.&rdquo;
+  </div>
+
+  <h3>Control of Microbial Growth: The Big Picture</h3>
+  <p>There are numerous ways in which pathogenic microbes can be managed or controlled, but microorganisms outnumber humans many times over. Most microbes are harmless but can become pathogenic if we let our guard down. Our bodies have learned how to coexist with many microbes, or have developed natural lines of defense against those microscopic invaders able to harm us. In addition to these natural lines of defense, surgical team members need an understanding of physical, chemical, and thermal methods of disinfection, decontamination, and sterilization of patient care items.</p>
+
+  <h3>What This Chapter Covers</h3>
+  <ul class="objectives-list">
+    <li><strong>The Three Lines of Defense</strong> &mdash; the structural barriers of skin and mucous membranes, the circulatory/chemical responses (phagocytes, complement, fever, inflammation), and immunity (innate, adaptive, active, and passive).</li>
+    <li><strong>Components of the Immune System</strong> &mdash; B-cells, T-cells, NK cells, humoral immunity, and cell-mediated immunity (CMI).</li>
+    <li><strong>Hypersensitivity Reactions &amp; Autoimmune Disorders</strong> &mdash; Types I&ndash;IV hypersensitivity, anaphylaxis, transfusion reactions, Rh incompatibility, autoimmune disease, and immunodeficiency.</li>
+    <li><strong>Herd Immunity &amp; Behavioral Factors</strong> &mdash; community protection through vaccination and the human behaviors that influence disease transmission.</li>
+    <li><strong>Prevention of Disease Transmission in the Surgical Environment of Care</strong> &mdash; environmental controls, attire, zoning, skin preparation, patient care item classification, disinfection, decontamination, sterilization methods, and process assurance monitors.</li>
+  </ul>
+
+  <h3>Chapter Objectives</h3>
+  <p class="section-intro">By the end of this chapter, you should be able to:</p>
+  <ul class="objectives-list">
+    <li>Define key terms.</li>
+    <li>Discuss the three lines of defense of the human body.</li>
+    <li>Compare and contrast innate, adaptive, and herd immunity.</li>
+    <li>Compare and contrast active and passive immunity.</li>
+    <li>Describe disinfection, decontamination, and sterilization of patient care items.</li>
+    <li>Apply critical thinking skills in relating chapter material to the surgical environment of care or broader global community.</li>
+  </ul>
+</div>
+
+
+<div id="firstsecond" class="tab-content">
+  <h2>First &amp; Second Lines of Defense</h2>
+  <p class="section-intro">The body is equipped with three basic lines of defense: (1) the structural design of the human body (skin and mucous membranes), (2) circulatory and chemical responses, and (3) immunity (active or passive, innate or adaptive). This tab covers the first two lines.</p>
+
+  <h3>First Line of Defense: Skin &amp; Mucous Membranes</h3>
+  <div class="card">
+    <h4>Skin</h4>
+    <p>The external and internal barriers presented by the skin, mucous membranes, and specialized secretions are part of the innate (natural, non-specific) immune system &mdash; a collection of protective mechanisms and responses with which humans are born. Uninjured, intact skin prevents microbes from entering the body, but when the skin is damaged &mdash; as when the surgeon makes the initial skin incision &mdash; it creates an opening for invasion by microbes like <em>Staphylococcus aureus</em>, part of our normal skin microflora. Burns, lacerations, or abrasions are examples of non-intact skin. Skin protects the body by secreting lactic acid from sweat glands and fatty acids from sebaceous glands that kill or inhibit growth of pathogenic bacteria, and the low-pH environment also inhibits microbial growth.</p>
+  </div>
+
+  <div class="card">
+    <h4>Mucous Membranes, Cilia &amp; Digestive/GU Tract</h4>
+    <p>Mucous membranes and cilia line the nasal passages, trachea, and bronchi, where cilia trap inhaled dust, dirt, and pathogens as they move back and forth, sweeping the trapped material forward into the throat to be eliminated by sneezing, coughing, or swallowing. Some Gram-positive bacteria are killed by lysozymes in nasal secretions, tears, and saliva. Digestive secretions in the alkaline intestines and highly acidic stomach kill microbes, and mucous secretions of the intestinal tract help trap pathogens, making them easier targets for phagocytes and enzymes. Peristalsis and defecation remove pathogens from the intestinal tract. The genitourinary tract is protected by frequent flushing during urination and by vaginal mucosal secretions in females.</p>
+  </div>
+
+  <h3>Second Line of Defense: Phagocytes</h3>
+  <p class="section-intro">For pathogens that do penetrate the body's first line of defense, they encounter the second line of defense: elements in the circulatory system including phagocytes, complement and other blood proteins, interferon, fever production, iron balance, and the inflammatory response.</p>
+
+  <div class="card">
+    <h4>Leukocytes &amp; Phagocyte Types</h4>
+    <p>Phagocytosis &mdash; the engulfing of bacteria and debris &mdash; is necessary in the fight against foreign invaders, but also routinely removes dead blood cells and other debris. Leukocytes (white blood cells) consist of basophils, eosinophils, lymphocytes, monocytes, and neutrophils, separated into <strong>granulocytes</strong> (neutrophils, eosinophils, basophils) and <strong>agranulocytes</strong> (monocytes and lymphocytes). All phagocytes are leukocytes, but not all leukocytes are phagocytes &mdash; they are the &ldquo;garbage collectors&rdquo; of the human body. Specific phagocytic cells are granulocytes and macrophages. Monocytes (agranulocytes) mature into macrophages in body tissues. Neutrophils are the most abundant and efficient phagocytes; eosinophils play a more efficient phagocytic role during the allergic response.</p>
+  </div>
+
+  <div class="alert clinical">
+    <strong>The Phagocytosis Process</strong>
+    The phagocyte's attraction to the bacterium is <strong>chemotaxis</strong>, a result of lymphokines produced by T-lymphocytes and the activation of complement. The bacterium and leukocyte attach; the phagocytic membrane indents (invaginates), and two pseudopods extend from the leukocyte to surround and entrap the bacterium, forming a vacuole called a <strong>phagosome</strong>. In the leukocyte, a lysosome containing digestive enzymes attaches to the phagosome to form a <strong>phagolysosome</strong>. Inside the phagolysosome, a degranulation digestive process destroys the bacterium through depletion of granules in granulocytes.
+  </div>
+
+  <div class="card">
+    <h4>Fixed Phagocytes &amp; the Reticuloendothelial System (RES)</h4>
+    <p>Fixed phagocytes are cells attached to the liver, bone marrow, spleen, linings of the blood vessels and GI tract, and lymph nodes. The reticuloendothelial system (RES) is composed of these tissues. Lymph nodes remove microbes from lymph fluid before it reaches major lymph ducts and empties into the bloodstream. If bacteria do escape lymph nodes, the phagocytes of the spleen, liver, and bone marrow assist in filtering out the invaders.</p>
+  </div>
+
+  <h3>Complement, Prostaglandins, Interleukins &amp; Interferons</h3>
+  <div class="card">
+    <h4>Complement</h4>
+    <p>A group of proteins in blood plasma that are inactive until needed as a second line of defense; complement is non-specific, as it binds to many variations of antigen&ndash;antibody complexes. Complement facilitates lysis of bacterial cells through the <strong>complement cascade</strong> &mdash; a sequence causing accumulation of fluid that continues until lysis of the cell membrane. Activated by substances on the pathogen that trigger complement proteins to respond and coat the pathogen to enhance phagocytosis. Antibodies are not required for initiation of this response; immediate activation is part of the innate or natural immune response.</p>
+  </div>
+
+  <div class="card">
+    <h4>Prostaglandins</h4>
+    <p>Prostaglandins (including prostacyclin) are unsaturated fatty acids with varied, potent effects in low concentrations, including: being potent inhibitors of platelet aggregation; controlling the immune response and inflammation; increasing capillary permeability; being active in the autoimmune response; pain production; and treatment of gastric hyperacidity and asthma.</p>
+  </div>
+
+  <div class="card">
+    <h4>Interleukins &amp; Interferons</h4>
+    <p><strong>Interleukins</strong> are a group of polypeptides produced primarily by T-cells or macrophages, each with complex biochemical actions; most direct other cells to divide and differentiate. Receptors on cells are specific for the interleukin (IL) that attaches.</p>
+    <ul class="detail-list">
+      <li><strong>IL-1:</strong> numerous immune functions, including activating resting T-cells, macrophages, and endothelial cells; stimulating synthesis of lymphokines; aiding the inflammatory response; also known as an endogenous pyrogen.</li>
+      <li><strong>IL-2:</strong> initiates proliferation of active T-cells; used in the lab to grow T-cell clones.</li>
+      <li><strong>IL-3:</strong> supports growth of bone marrow stem cells and is a growth factor for mast cells.</li>
+      <li><strong>IL-4:</strong> growth factor for active B-cells, non-activated T-cells, and mast cells.</li>
+    </ul>
+    <p><strong>&beta;-lysin</strong>, another polypeptide released from platelets during infection, destroys Gram-positive bacteria by causing lysis of plasma membranes; it is also located inside phagocytes and aids in digestion of microbes. <strong>Interferons</strong> are proteins produced when leukocytes, T-lymphocytes, and fibroblasts are infected, and they react to inhibit or &ldquo;interfere&rdquo; with viral replication within infected cells.</p>
+  </div>
+
+  <h3>Fever &amp; the Inflammatory Response</h3>
+  <div class="alert warning">
+    <strong>Fever</strong>
+    A non-specific, systemic, second-line host defense initiated by the hypothalamus of the brain to elevate the body's temperature in response to pyrogenic secretions produced by many pathogens. The increase in body temperature: stimulates production of IL-1; stimulates leukocytes to migrate to the area of infection and attack pathogens; and reduces the availability of iron in the plasma, limiting growth of pathogenic bacteria that require iron for synthesis of toxins.
+  </div>
+
+  <div class="card">
+    <h4>The Inflammatory Response</h4>
+    <p>The body responds to injury, bacterial toxins, and pathogens by initiating an inflammatory response &mdash; a process marked by the four classic signs of the battle occurring between the body and pathogens: swelling (edema), redness (blood flow to the area), heat, and pain; formation of pus is an additional sign.</p>
+    <ul class="detail-list">
+      <li>The skin is injured and penetrated.</li>
+      <li>Injured cells, mast cells, platelets, and basophils release histamine, bradykinin, heparin, and other kinins to increase capillary permeability, prevent clotting, and promote vasodilation.</li>
+      <li>Vasodilation and increased permeability allow more blood to enter the area, carrying clotting agents and leukocytes for phagocytosis and antibody production.</li>
+      <li>Macrophages are attracted by chemotaxis to the secretions of the damaged cells.</li>
+      <li>Edema results from fluid collection (inflammatory exudate); if greenish-yellow, it is called purulent exudate, or pus.</li>
+      <li>Erythrocytes collect in the area, producing redness. Cellular activities destroy microbes, dead cells, and toxins, producing heat and systemic fever.</li>
+      <li>Pain results from damage to nerve fibers at the initial injury, irritation by toxins, or edema putting pressure on nerves.</li>
+      <li>If the body wins, the inflammatory response ends, phagocytes continue cleaning up debris, and cells repair damaged tissue for healing.</li>
+    </ul>
+  </div>
+</div>
+
+
+<div id="immunity" class="tab-content">
+  <h2>Third Line of Defense: Immunity &amp; Vaccines</h2>
+  <p class="section-intro">Immunity is defined as resistance to an infection or disease brought about by production of specific antibodies that protect against the pathogens that caused the initial infection or disease.</p>
+
+  <h3>Adaptive Immunity: Active vs. Passive</h3>
+  <div class="card">
+    <h4>Adaptive (Acquired) Immunity</h4>
+    <p>In adaptive or acquired immune responses, antibodies are produced by lymphocytes that bind with microbes to inactivate and destroy them. Humoral antibodies are in the lymph fluid, plasma, and other body secretions, and are stimulated to form due to the presence of specific pathogens. Two primary types of acquired immunity are (1) active adaptive immunity and (2) passive adaptive immunity.</p>
+  </div>
+
+  <div class="alert clinical">
+    <strong>Active Adaptive Immunity: Natural vs. Artificial</strong>
+    <strong>Natural active adaptive immunity</strong> &mdash; those who have had a specific infection will have partial or total resistance to reinfection by that specific microbial pathogen because antibodies are produced by stimulated lymphocytes; resistance may be permanent or temporary. <strong>Artificial active adaptive immunity</strong> &mdash; gained by vaccination with a vaccine formula containing sufficient numbers of pathogens or their markers to cause formation of antibodies against the pathogen, without creating the specific disease.
+  </div>
+
+  <h3>Types of Vaccines</h3>
+  <div class="card">
+    <h4>Live, Attenuated &amp; Inactivated Vaccines</h4>
+    <p>Vaccines have often been made from inactivated or attenuated living pathogens, or from toxins they secrete. Vaccines created from living microbes are the most effective but must be prepared from a harmless microbe closely related to the pathogen, or from weakened pathogens that have been genetically modified to render them non-pathogenic in a process called <strong>attenuation</strong>. The smallpox vaccine is a weakened live vaccine derived from cowpox virus (vaccinia) that usually causes a mild infection in humans, but a reaction to the live virus may be serious or life-threatening.</p>
+  </div>
+
+  <div class="alert warning">
+    <strong>Eczema Vaccinatum</strong>
+    A serious rash caused by widespread skin infection known as eczema vaccinatum can occur in some individuals with pre-existing eczema or atopic dermatitis. At-risk individuals may only briefly contact inoculated areas of a person who was recently vaccinated, and they can contract the vaccinia virus. Dead pathogens killed by chemicals or heat are more commonly used for vaccines and can be manufactured faster and more easily, but are less effective than live vaccines and produce a shorter period of immunity.
+  </div>
+
+  <div class="card">
+    <h4>mRNA Vaccines</h4>
+    <p>The newest form of vaccine, developed in response to the COVID-19 pandemic, is the messenger RNA (mRNA) vaccine, which teaches our cells how to make a protein or specific portion of a protein that triggers a response. Antibodies created due to that immune response to the protein provide protection if a real virus gains entry &mdash; unlike vaccines that rely on introduction of weakened or inactivated pathogens. There are many routine childhood and adult immunizations, as well as immunizations for travelers to foreign countries where endemic disease may be present, and for pre-exposure or post-exposure protection against certain known pathogens.</p>
+  </div>
+
+  <div class="card">
+    <h4>Toxoid Vaccines, Antisera, Antitoxins &amp; Antivenoms</h4>
+    <p>A third type of vaccine, specifically used to prevent diphtheria and tetanus, is the <strong>toxoid vaccine</strong> &mdash; prepared from exotoxins secreted by specific pathogens, inactivated by heat or chemicals, and injected to cause formation of antibodies that neutralize them. An <strong>antiserum</strong> is a vaccine that contains specific antibodies. An <strong>antitoxin</strong> is a type of antiserum that contains antibodies against specific toxoids. An <strong>antivenom</strong> is a serum prepared from specific types of venom to counteract the toxic elements in them.</p>
+  </div>
+
+  <h3>Passive Adaptive Immunity</h3>
+  <div class="alert clinical">
+    <strong>Natural vs. Artificial Passive Immunity</strong>
+    Passive adaptive immunity differs from active immunity in that antibodies formed in an immune individual are transferred to a recipient who did not produce their own antibodies, so the immunity is temporary. It has two subcategories: (1) <strong>Natural passive adaptive immunity</strong> &mdash; antibodies present in the bloodstream of a pregnant female cross the placenta to reach the fetus, and colostrum containing maternal antibodies is passed to the breastfed infant. (2) <strong>Artificial passive adaptive immunity</strong> &mdash; created by transferring antibodies from an immune person to a susceptible person in the form of convalescent (healed or recovered from) plasma donation.
+  </div>
+
+  <h3>Antigens &amp; Antibodies</h3>
+  <div class="card">
+    <h4>Antigens &amp; the MHC</h4>
+    <p>Antigens are foreign substances that enter the body and stimulate the production of antibodies (also referred to as immunogens) when the substance is not recognized as part of the body itself; the initiated response is termed immunogenic. Antigens can be formed from many biochemical substances; best known are foreign protein antigens. Antigens have one or more sites called <strong>antigenic determinants</strong> to which antibodies or lymphocytes bind. The mechanism the body uses to recognize &ldquo;self&rdquo; is a group of proteins in the <strong>major histocompatibility complex (MHC)</strong>, produced by the body's own genes.</p>
+  </div>
+
+  <div class="card">
+    <h4>Antibodies &amp; the Primary Response</h4>
+    <p>Antibodies are glycoproteins produced by B-lymphocytes (B-cells) that bind to the receptor site of a specific antigen. A bacterium has several antigenic determinant sites on its cell membrane, cell wall, capsule, and flagella that stimulate antibody production. Antibodies are in a class of proteins called <strong>immunoglobulins (Ig)</strong>; the term &ldquo;antibody&rdquo; refers to the specific type of immunoglobulin involved in the immune response, and antibodies are also found in lymph fluid, colostrum, tears, and saliva.</p>
+    <p>After exposure to an antigen, there is a delayed response in the production of antibodies called the <strong>lag phase</strong>, involving macrophages, T-cells, and B-cells. Some antigens require only B-cells. B-cells develop into larger plasma cells that produce antibodies by protein synthesis &mdash; this first step is called the <strong>primary response</strong>. When the number of antigens declines, the number of antibodies in the bloodstream also declines as the plasma cells die off.</p>
+  </div>
+
+  <h3>When Antibody Production Fails</h3>
+  <div class="alert warning">
+    <strong>Agammaglobulinemia &amp; Hypogammaglobulinemia</strong>
+    Persons may be born with an inherited gene that leaves them without the ability to produce antibodies, so they have no gammaglobulin in their blood &mdash; a condition called <strong>agammaglobulinemia</strong>. Others with very low levels of antibodies have <strong>hypogammaglobulinemia</strong>; both groups are susceptible to a variety of infections, any of which can be fatal. One treatment for these genetic conditions is a bone marrow transplant with precursor leukocytes transferred to the patient, which become lymphocytes and eventually implant in the lymph nodes, capable of being stimulated by antigens to produce antibodies.
+  </div>
+</div>
+
+
+<div id="components" class="tab-content">
+  <h2>Components of the Immune System</h2>
+  <p class="section-intro">Immune cells originate in bone marrow as stem cells that develop into a variety of specialized cells, branching into two major pathways: the innate immune cells (from myeloid progenitors) and the adaptive immune cells (from lymphoid progenitors).</p>
+
+  <h3>Where Immune Cells Come From</h3>
+  <div class="card">
+    <h4>Myeloid Progenitor Stem Cells (CMPs)</h4>
+    <p>The cells of the body that function as first-line responders in infectious disease &mdash; neutrophils, eosinophils, mast cells, monocytes, macrophages, and dendritic cells &mdash; are products of common myeloid progenitor stem cells (CMPs) in the bone marrow, and are the precursors to innate immune cells.</p>
+  </div>
+
+  <div class="card">
+    <h4>Lymphoid Progenitor Stem Cells (CLPs)</h4>
+    <p>Adaptive (acquired) immune cells develop from common lymphoid progenitor stem cells (CLPs) and include two cell lineages: <strong>B-cells</strong> (bursa-derived) and <strong>T-cells</strong> (thymus-derived). Stem cells migrate to the thymus gland to differentiate into one of four types of T-cells: (1) helper, (2) suppressor, (3) cytotoxic, and (4) delayed-hypersensitivity. Specialization of T-cells begins shortly before birth. T-cells are not involved in humoral antibodies but are involved in cell-mediated immune (CMI) response and control of antibody production.</p>
+  </div>
+
+  <div class="card">
+    <h4>B-Cells &amp; Natural Killer (NK) Cells</h4>
+    <p>Other stem cells do not migrate to the thymus, instead differentiating in the lymphoid regions of the intestines, liver, and spleen. B-cells (bursa-derived) originate from those regions and migrate to lymphoid tissues, producing antibodies that circulate in the lymphatic system and bloodstream, providing humoral immunity. B-cells live only 1 to 2 weeks, but when stimulated by an antigen, are capable of immediate mass production of antibodies. <strong>Natural killer (NK) cells</strong> (or cytotoxic cells) come from myeloid progenitor stem cells but behave like both innate and adaptive immune cells. As a group, B-cells, T-cells, and NK cells are called <strong>lymphocytes</strong>.</p>
+  </div>
+
+  <h3>Humoral Immunity</h3>
+  <div class="alert clinical">
+    <strong>Immunological Memory &amp; Humoral Immunity</strong>
+    <strong>Immunological memory</strong> refers to B-cell and T-cell responses to specific microbial markers from previous exposures. B-cells comprise humoral immunity, and T-cells control cell-mediated immunity. Humoral immunity is based on immunoglobulins (antibodies) produced by B-cells, which stick to foreign antigens, marking them for destruction by phagocytes. When the complex is formed, complement is activated to lyse invading bacterial cells, neutralize toxins, and increase phagocytosis. Antibodies are molecules made of four peptide chains arranged in the shape of a &ldquo;Y.&rdquo; Antibodies in the bloodstream are referred to as humoral or circulating antibodies. Five isotypes (classes) of antibodies are designated as IgA, IgD, IgE, IgG, and IgM.
+  </div>
+
+  <h3>Cell-Mediated Immunity (CMI)</h3>
+  <div class="card">
+    <h4>Why CMI Matters</h4>
+    <p>Antibodies cannot enter cells, even those with intracellular pathogens, so cell-mediated immunity (CMI) relies on macrophages and T-cells to control chronic infections. CMI can control the antigenic cause of the infection, but it does not eliminate it. For example, herpes virus travels through body fluids from a lysed cell seeking to infect other normal cells; while moving through fluids, the virus is exposed to the antibody&ndash;complement complex and is destroyed, thereby controlling the viral infection. If the virus is already inside a cell, the CMI response can destroy the infected cell, but if the virus-infected cell escapes destruction, it can become latent in nerve ganglion cells.</p>
+  </div>
+
+  <div class="card">
+    <h4>T-Cell Roles</h4>
+    <p>CMI is composed of <strong>helper T-cells</strong> that work with B-cells to initiate the antibody response. Helper T-cells trigger the release of macrophages to seek out &ldquo;non-self&rdquo; cells, and produce interleukins, which lead to creation of new T-cells and B-cells. <strong>Suppressor T-cells</strong> ensure that cytotoxic T-cells do not over-produce, keeping the immune response effective but not destructive to the body's normal tissues. NK cells and <strong>cytotoxic T-cells</strong> are effective in destroying pathogens inside infected cells.</p>
+  </div>
+
+  <div class="alert warning">
+    <strong>Helper T-Cells &amp; HIV/AIDS</strong>
+    The decrease or depletion of helper T-cells impairs the functions of both the humoral and CMI immune systems, as seen in diseases such as HIV/AIDS.
+  </div>
+</div>
+
+
+<div id="hypersensitivity" class="tab-content">
+  <h2>Hypersensitivity Reactions &amp; Autoimmune Disorders</h2>
+  <p class="section-intro">Hypersensitivity reactions are abnormal immune responses that can be mild to life-threatening; instead of providing protection, the antibodies damage body cells. Several categories of hypersensitivity reactions are due to the presence of an antigen and T-cells sensitized to that antigen; reactions are divided into two primary categories: immediate and delayed. Immediate reactions occur from a few seconds to 24 hours after exposure.</p>
+
+  <h3>The Four Types of Hypersensitivity</h3>
+  <table>
+    <tr><th>Type</th><th>Description</th></tr>
+    <tr><td>Type I</td><td>Immediate reaction; most dangerous and life-threatening; involves IgE antibodies and release of histamine from basophils and mast cells.</td></tr>
+    <tr><td>Type II</td><td>Antibody-dependent reaction, is immediate; involves IgG or IgM antibodies and complement.</td></tr>
+    <tr><td>Type III</td><td>Immune complex reaction; involves IgM or IgG antibodies, neutrophils, and complement.</td></tr>
+    <tr><td>Type IV</td><td>Delayed-type (cell-mediated) hypersensitivity reaction; does not involve antibodies, but involves sensitized T-cells that secrete lymphokines due to a subsequent exposure to the antigen.</td></tr>
+  </table>
+
+  <h3>Type I: Immediate Hypersensitivity</h3>
+  <div class="card">
+    <h4>Allergic Reactions</h4>
+    <p>Type I is the most common type of hypersensitivity because most humans are allergic to at least one thing, and produce IgE antibodies if exposed to allergens. An allergic reaction occurs when IgE antibodies present on mast cells in connective tissue or basophils in the blood are exposed for the first time to an antigen (allergen). During the second exposure, the mast cell or basophil with IgE binds to the allergen. The sensitized cells respond by releasing histamine, prostaglandins, serotonin, bradykinin, and other substances responsible for symptoms of sneezing, rhinitis (runny nose), and itchy eyes.</p>
+  </div>
+
+  <div class="card">
+    <h4>Localized Reaction (Hay Fever Example)</h4>
+    <p>Symptoms depend on how the allergen enters the body and where the IgE attaches. If the allergen is inhaled pollen (as in hay fever allergy), it is deposited on the mucous membranes of the respiratory tract; IgE antibodies attach to mast cells there. The second exposure causes the mast cells with IgE to bind with the allergen, releasing large amounts of histamine, which produces hay fever symptoms. OTC or prescribed antihistamines bind to histamine sites, blocking histamine and its ability to produce symptoms.</p>
+  </div>
+
+  <div class="alert warning">
+    <strong>Anaphylaxis &mdash; The Most Severe Reaction</strong>
+    Anaphylaxis is the most severe and potentially life-threatening type of hypersensitivity reaction, occurring after exposure to an antigen to which the person has previously been sensitized (most commonly drugs or insect venom). Signs include itching, skin flushing, headache, ringing in the ears, metallic taste, bronchospasm or laryngospasm, hypertension, and tachycardia in the immediate period, followed by hypotension, confusion, nausea, and respiratory failure. Death can occur without immediate administration of IV fluids, steroids, epinephrine, oxygen, and vasopressors.
+  </div>
+
+  <div class="card">
+    <h4>Managing Allergy Risk</h4>
+    <p>For healthcare providers and the surgical team, allergies are marked on the patient's chart and hospital identification bracelet. Outside healthcare settings, individuals with serious allergies can alert the public by wearing metal ID alert bracelets that indicate allergy status. Auto-injector type devices such as EpiPen&reg; are premeasured doses of epinephrine available for those with a history of anaphylactic reaction and should be kept nearby when there is a risk of allergy exposure.</p>
+  </div>
+
+  <h3>Type II: Antibody-Dependent Reactions</h3>
+  <div class="card">
+    <h4>Hemolytic Transfusion Reaction</h4>
+    <p>An example of a Type II immediate hypersensitivity reaction: when transfused donated blood is not properly matched to the patient's blood type, a potentially fatal, massive systemic transfusion reaction can occur. The first step in response is to stop the blood transfusion. A blood sample from the blood bag should be sent to the blood bank to rule out a mismatch. Steroids are given and urine output is closely monitored for hypovolemia; the patient may require dialysis to remove the mismatched blood.</p>
+  </div>
+
+  <div class="alert clinical">
+    <strong>Rh Incompatibility &amp; Hemolytic Disease of the Newborn</strong>
+    Occurs when a pregnant female's blood type is Rh negative and the fetus is Rh positive (from the father's genes), and red blood cells from the fetus mix with the mother's blood through the placenta, creating a hypersensitivity response and production of antibodies against the &ldquo;foreign&rdquo; or non-self fetal blood. If the mother's antibodies cross the placenta, they attack the blood cells of the fetus. Mild reactions cause neonatal jaundice, treated by phototherapy after delivery. Serious reactions may result in fetal demise, brain damage, or serious developmental delays. This is uncommon where prenatal care is available with RhoGAM (Rho D immune globulin human). Hemolytic disease of the newborn (HDN), known as erythroblastosis fetalis, may require fetal blood transfusion in severe cases.
+  </div>
+
+  <h3>Type III: Autoimmune Disease</h3>
+  <div class="card">
+    <h4>When the Body Attacks Itself</h4>
+    <p>Type III hypersensitivity reactions are the result of an autoimmune disorder that develops when the immune system fails to recognize tissue as part of &ldquo;self&rdquo; and attempts to destroy what it perceives as foreign; this may be directed to single organs or may be a systemic reaction.</p>
+    <p><strong>Examples (systemic):</strong> rheumatoid arthritis, lupus erythematosus, multiple sclerosis, scleroderma, Reiter's syndrome, Sjogren's syndrome, and Crohn's disease.</p>
+    <p><strong>Single-organ disorders:</strong> Type I (insulin-dependent) diabetes mellitus (IDDM), Grave's disease (causes hyperthyroidism and exophthalmos), and myasthenia gravis (causes muscle weakness).</p>
+  </div>
+
+  <h3>Type IV: Delayed Hypersensitivity</h3>
+  <div class="card">
+    <h4>Sensitized T-Cells</h4>
+    <p>Type IV hypersensitivity is unique in that sensitized T-cells secrete substances in the absence of antibodies. For example: antigens invade the body; when the antigen is being phagocytized by macrophages, the T-cells attached to the macrophage are sensitized by the antigen. When the sensitized T-cells are exposed to the antigen a second time, they secrete lymphokines (cytokines produced by lymphocytes), which directly destroy the antigen. Examples of delayed hypersensitivity include the TB test (read 48 hours after injection), poison ivy rash, and recipient organ or tissue rejection following implantation.</p>
+  </div>
+
+  <h3>Immunodeficiency Disorders</h3>
+  <div class="alert warning">
+    <strong>Primary &amp; Acquired Immunodeficiency</strong>
+    Any part of the immune system may be affected, occurring when T-lymphocytes or B-lymphocytes (or both) malfunction and too few antibodies are produced. These disorders may be primary or acquired. There are more than 180 documented primary immunodeficiency disorders. Acquired immunodeficiency disorders are complications of HIV, malnutrition, chemotherapy, anti-rejection regimens, and absence of the spleen (splenectomy). Older adults and individuals with diabetes are also at increased risk.
+  </div>
+</div>
+
+
+<div id="herdbehavior" class="tab-content">
+  <h2>Herd Immunity &amp; Behavioral Factors</h2>
+
+  <h3>Herd Immunity</h3>
+  <div class="alert clinical">
+    <strong>Community Immunity</strong>
+    Herd immunity, also known as community immunity, is a phenomenon of protection for a large group or community of people from communicable disease when most individuals in the group have been properly vaccinated. Those few individuals who have not been vaccinated &mdash; due to allergies to the vaccine, an immunocompromised status, or religious/moral objections &mdash; are unlikely to become infected due to the near-total lack of widely circulating pathogens with so few viable human reservoirs. In certain diseases such as measles, approximately 95% of the community must be vaccinated for herd immunity to be effective. Prior to vaccination campaigns, each person infected with measles in turn infected an average of 11 to 18 others.
+  </div>
+
+  <div class="card">
+    <h4>Measles &amp; Vaccine Misinformation</h4>
+    <p>Because the measles virus can remain viable on inanimate surfaces for hours after inoculation, its transmissibility potential is sufficient to disseminate measles to large groups. Objection to vaccination of children has been mainly linked to erroneous information reported by a discredited British researcher who linked autism in young children to vaccines but had falsified his data and was funded by attorneys suing makers of MMR vaccines.</p>
+  </div>
+
+  <h3>Behavioral Factors in Disease Transmission</h3>
+  <p class="section-intro">Human behavior is frequently the main factor in transmission of disease, even unintentional and unrealized. Behavioral factors that impact control or prevention of disease transmission include the following.</p>
+
+  <div class="card">
+    <h4>Public Health &amp; Community-Level Factors</h4>
+    <ul class="detail-list">
+      <li>Sexually transmitted infection or disease (STI/STD) can be reduced or prevented with safe-sex practices or abstinence, screening, and avoiding risky behaviors.</li>
+      <li>Following recommendations for routine vaccinations to eliminate preventable diseases and protect vulnerable pediatric and older adult populations contributes to herd immunity for most of the public.</li>
+      <li>Local government infrastructure mechanisms must be adequately maintained and monitored to prevent contamination of public water supplies for drinking and irrigation of crops.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Food Safety &amp; Household Factors</h4>
+    <p>Careful food preparation and storage methods can help prevent most cases of food-borne infections. Risk factors include:</p>
+    <ul class="detail-list">
+      <li>Cross-contamination of kitchen surfaces by raw meats or eggs.</li>
+      <li>Failure to reach adequate internal temperatures during cooking of certain foods.</li>
+      <li>Selection of unpasteurized dairy items for consumption.</li>
+      <li>Failure to maintain sufficiently cold temperatures of prepared foods.</li>
+      <li>Unwashed raw fruits and vegetables.</li>
+      <li>Fecal&ndash;oral contamination of foods from unwashed hands of food preparers.</li>
+    </ul>
+    <p>Pet owners should maintain a schedule for routine vaccinations for their house pets and recognize the potential for infectious bacteria in cat or dog urine or feces when young children or pregnant females are in the household.</p>
+  </div>
+
+  <div class="alert warning">
+    <strong>Healthcare Worker Practices</strong>
+    Healthcare workers, including physicians, must practice appropriate infection control techniques including: proper hand washing or skin antisepsis before and after every interaction with patients and after eating or using the restroom; use of personal protective equipment (PPE) when indicated to reduce cross-contamination between patients or between patients and caregivers; carefully evaluated administration of antibiotic therapy to reduce the increase in antibiotic resistance of pathogenic microbes; and environmental cleaning and decontamination of surfaces in healthcare settings to prevent dissemination of unseen pathogenic microbes throughout the facility and reduce potential for deadly and costly healthcare-associated infections.
+  </div>
+</div>
+
+
+<div id="surgical" class="tab-content">
+  <h2>Prevention of Disease Transmission in the Surgical Environment of Care</h2>
+  <p class="section-intro">Surgical technology students are provided extensive education in decontamination of areas, surfaces, and equipment within the operating room suite; disinfection of patient care items; and sterilization of surgical instrumentation.</p>
+
+  <h3>Environmental Controls, Attire &amp; Zoning</h3>
+  <div class="card">
+    <h4>Environmental Controls</h4>
+    <p>Surgical suites are designed to minimize the potential for cross-contamination of clean and contaminated items by creation of traffic patterns and zoning. Architectural and engineering plans must address: 15&ndash;20 air exchanges per hour in unidirectional, positive-pressure air flow from top to bottom to prevent turbulence, with HEPA filters reducing airborne contaminants, electrosurgical smoke plume, and escaped anesthesia gases; non-porous, non-grouted, waterproof floors, walls, and ceilings that can withstand constant cleaning; and moderately cool temperatures with monitored humidity levels to reduce microbial growth.</p>
+  </div>
+
+  <div class="card">
+    <h4>Attire</h4>
+    <p>Personnel should wear appropriate hospital-laundered attire; PPE (hats, shoe covers, masks, eye protection, lead aprons, or impervious aprons or gowns); cover jackets to contain skin shedding, or isolation gowns for contact precautions; and no jewelry on hands or wrists, and no nail polish, wraps, tips, charms, or artificial nails.</p>
+  </div>
+
+  <div class="card">
+    <h4>Zoning</h4>
+    <p>Hospital policies should be followed regarding traffic patterns within the surgical department to clearly define flow of personnel, patients, and supplies; separation of clean or sterile items from soiled items to prevent cross-contamination; and specific attire to be worn in restricted, semi-restricted, or unrestricted areas.</p>
+  </div>
+
+  <h3>Skin Preparation</h3>
+  <div class="alert clinical">
+    <strong>Surgically Clean, Not Sterile</strong>
+    The process of a surgical scrub or preoperative patient skin prep removes transient microbes and reduces the resident microbial population on the skin to an irreducible minimum, rendering it &ldquo;surgically clean&rdquo; but not sterile. Living skin cannot be sterilized, as it will always have resident microflora present in the tissues. Aseptic techniques are used to prevent transmission or potential for infection, as in reduction of microbes on the skin of the surgical team members or the patient's own skin prior to an incision into superficial layers that could carry opportunistic microbes into deeper layers. Following skin preparation, sterile team members don sterile gowns and gloves, and the patient is covered with layers of sterile draping materials to serve as physical barriers between unsterile areas and the sterile field.
+  </div>
+
+  <h3>Patient Care Items, Disinfection &amp; Decontamination</h3>
+  <div class="card">
+    <h4>The Three Classifications of Patient Care Items</h4>
+    <table>
+      <tr><th>Classification</th><th>Description</th></tr>
+      <tr><td>Non-critical</td><td>Items with the lowest potential for causing infection; cleaned with low-level or intermediate-level disinfectants.</td></tr>
+      <tr><td>Semi-critical</td><td>Items that contact intact mucous membranes; cleaned with high-level disinfectants.</td></tr>
+      <tr><td>Critical</td><td>Items that contact non-intact skin or internal tissues or access the bloodstream; must be sterilized by the appropriate method.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4>Disinfection</h4>
+    <p>Chemical agents that kill various pathogenic microbes; used on inanimate (non-living) objects or surfaces, including non-critical or semi-critical patient care items, or for environmental cleaning of durable surfaces and equipment in the OR suite. There are three levels of disinfection: low-level, intermediate-level, and high-level. Disinfectants include isopropyl alcohol, sodium hypochlorite (bleach), and other antimicrobial agents.</p>
+  </div>
+
+  <div class="card">
+    <h4>Decontamination</h4>
+    <p>Contamination is the presence of pathogenic microbes and can involve human tissues as well as surgical instrumentation. Decontamination is the process of reducing the microbial population to sub-pathogenic levels. The process of instrument decontamination begins with initial cleaning at the point of use &mdash; in the OR, at the time of the procedure. Instruments should be rinsed of blood and tissue to reduce the bioburden on surfaces. Following the procedure, items are transported to a decontamination area where they are fully cleaned by manual or mechanical methods, inspected, packaged, and readied for sterilization by the appropriate method for the items.</p>
+  </div>
+
+  <h3>Sterilization Methods</h3>
+  <div class="alert warning">
+    <strong>Sterilization: Destroying ALL Living Microorganisms</strong>
+    Sterilization is the process of destroying all living microorganisms, including spore-forming bacteria, because they are the most resistant type of microbe due to their ability to withstand harsh environmental conditions. Critical patient care items such as surgical instrumentation must be sterile to prevent surgical site infections (SSIs). Hospital central sterile processing departments (CSPD) utilize various methods to achieve sterility depending on the properties of the instruments.
+  </div>
+
+  <div class="card">
+    <h4>Steam Under Pressure</h4>
+    <p>Steam under pressure is the most widely used method of sterilization; it is inexpensive, reliable, safe, and appropriate for most surgical instrumentation. Direct contact with every surface of items being sterilized is the primary principle, so if any portion of the surface and/or lumen of an item is not contacted by steam, the item is considered unsterile because there was a failure in the process.</p>
+  </div>
+
+  <div class="card">
+    <h4>Chemical Sterilization Methods</h4>
+    <p>Chemicals approved for use as sterilants are available in gas, liquid, or plasma form.</p>
+    <ul class="detail-list">
+      <li><strong>Ethylene oxide (EO)</strong> &mdash; used to process heat-sensitive or moisture-sensitive materials that cannot be processed using steam sterilization. Effective against all forms of microbes and is sporicidal; does not corrode metal, but many hazards exist with use: flammable, carcinogenic, toxic, and requires long aeration.</li>
+      <li><strong>Hydrogen peroxide gas plasma</strong> &mdash; replaced EO in many facilities; uses gas plasma at low temperatures to sterilize heat-sensitive and moisture-sensitive items by diffusion of hydrogen peroxide in a gaseous state, with addition of a strong electrical field created by radiofrequency that passes through the gas, creating a cloud of plasma and free radicals that inactivate all microbial life.</li>
+      <li><strong>Glutaraldehyde</strong> &mdash; a low-temperature method of liquid chemical disinfection and sterilization used for heat-sensitive devices that can withstand being immersed.</li>
+      <li><strong>Peracetic acid</strong> &mdash; another low-temperature liquid chemical sterilization method that can replace glutaraldehyde; an alternative to steam under pressure and EO. Generally safe for heat-sensitive but moisture-stable items, but corrosive to some metals. Newer vaporized peracetic acid (VPA) technology has wider application to critical patient care items that cannot tolerate liquid immersion.</li>
+    </ul>
+  </div>
+
+  <h3>Sterilization Process Assurance Monitors</h3>
+  <div class="card">
+    <h4>Mechanical &amp; Chemical Indicators</h4>
+    <p><strong>Mechanical indicators</strong> are the printouts generated by the sterilizer unit that record cycle times and critical parameters. <strong>Chemical indicators/integrators</strong> validate the chemical process and are designed to turn color when exposed to the type of sterilant for which they test, providing visual assurance that the tray or pack went through the sterilization process &mdash; but do not guarantee items within the pack or tray are sterile. Tapes, strips, dots, or symbols may be inserted in instrument trays or packs (internal indicator) or placed on the outside of an in-hospital prepared package (external indicator).</p>
+  </div>
+
+  <div class="alert clinical">
+    <strong>Biological Indicators (BIs) &amp; Administrative Monitors</strong>
+    Biological indicators (BIs) are devices that contain a small dose of a specific type of bacteria normally killed when exposed to specific sterilizing conditions (heat, chemicals). The bacterial sample is in the spore stage and highly resistant to destruction. A BI is the only test that demonstrates that the sterilization method used was able to kill the microorganisms that otherwise could survive those conditions; the presumption is that items are sterile and conditions for sterilization were met. BI for steam sterilization contains the bacterial spore <em>Geobacillus stearothermophilus</em>, which is highly resistant to steam but harmless to humans; for ethylene oxide, spores of <em>Bacillus atrophaeus</em> are used. <strong>Administrative monitors</strong> are the record-keeping of all three types of process monitors, in anticipation of inspection by agencies like the Joint Commission or in instances of tracking for sterilizer failure or root cause analyses for SSIs.
+  </div>
+</div>
+
+
+<div id="terms" class="tab-content">
+  <h2>Key Terms</h2>
+  <p class="section-intro">Click any card to reveal its definition. Use the filter to focus on a specific category of terms.</p>
+  <div class="flash-controls">
+    <label for="cat-filter">Filter by category: </label>
+    <select id="cat-filter" onchange="filterCards()">
+      <option value="all">All Terms (58)</option>
+      <option value="First/Second Line of Defense">First/Second Line of Defense</option><option value="Herd Immunity & Behavior">Herd Immunity & Behavior</option><option value="Hypersensitivity & Autoimmune">Hypersensitivity & Autoimmune</option><option value="Immune System Components">Immune System Components</option><option value="Immunity & Vaccines">Immunity & Vaccines</option><option value="Surgical Infection Control">Surgical Infection Control</option>
+    </select>
+  </div>
+  <div class="flash-grid" id="flash-grid">
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Chemotaxis</div><div class='def'>The chemical attraction of a phagocyte toward a bacterium, resulting from lymphokines produced by T-lymphocytes and complement activation.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Phagosome</div><div class='def'>The vacuole formed when pseudopods of a leukocyte surround and entrap a bacterium during phagocytosis.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Phagolysosome</div><div class='def'>The structure formed when a lysosome containing digestive enzymes attaches to a phagosome, leading to destruction of the engulfed bacterium.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Invaginates</div><div class='def'>Describes the phagocytic membrane indenting inward as it begins to surround and engulf a bacterium.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Complement Cascade</div><div class='def'>A sequence of plasma protein reactions that causes accumulation of fluid leading to lysis of a bacterial cell membrane.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Prostaglandins</div><div class='def'>Unsaturated fatty acids with potent effects including inhibiting platelet aggregation, increasing capillary permeability, and producing pain.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Interleukins</div><div class='def'>A group of polypeptides produced primarily by T-cells or macrophages that direct other immune cells to divide and differentiate.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Pyrogen</div><div class='def'>A substance (often produced by pathogens) that triggers the hypothalamus to raise body temperature, producing fever.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Lymphokines</div><div class='def'>Cytokines (chemical messengers) produced by lymphocytes, including sensitized T-cells, that can directly destroy antigens.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Mast Cells</div><div class='def'>Connective tissue cells that release histamine and other mediators when IgE-bound allergens bind to them, triggering allergic symptoms.</div></div>
+  <div class='flashcard' data-cat="First/Second Line of Defense" onclick="this.classList.toggle('flipped')"><div class='term'>Kinins</div><div class='def'>Substances such as bradykinin released during the inflammatory response that increase capillary permeability and promote vasodilation.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Attenuated</div><div class='def'>Describes a weakened pathogen that has been genetically modified to be non-pathogenic for use in a live vaccine.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Toxoid</div><div class='def'>A vaccine prepared from inactivated exotoxins (e.g., for diphtheria and tetanus) that causes formation of neutralizing antibodies.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Antiserum</div><div class='def'>A vaccine that contains specific antibodies, rather than antigens, to provide immediate (passive) protection.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Antitoxin</div><div class='def'>A type of antiserum that contains antibodies against specific toxoids/toxins.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Antivenom</div><div class='def'>A serum prepared from specific types of venom to counteract the toxic elements of that venom.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Humoral Immunity</div><div class='def'>Immunity based on antibodies (immunoglobulins) produced by B-cells that circulate in plasma, lymph, and other body fluids.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Immunoglobulins (Ig)</div><div class='def'>The class of glycoprotein molecules that includes all antibodies; five isotypes are IgA, IgD, IgE, IgG, and IgM.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Antigenic Determinants</div><div class='def'>Specific sites on an antigen to which antibodies or lymphocytes bind.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Agammaglobulinemia</div><div class='def'>An inherited condition in which a person cannot produce antibodies and has no gammaglobulin in the blood.</div></div>
+  <div class='flashcard' data-cat="Immunity & Vaccines" onclick="this.classList.toggle('flipped')"><div class='term'>Major Histocompatibility Complex (MHC)</div><div class='def'>A group of proteins, produced by the body's own genes, that the immune system uses to recognize "self."</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Common Myeloid Progenitor Stem Cells (CMPs)</div><div class='def'>Bone marrow stem cells that give rise to first-line responder cells: neutrophils, eosinophils, mast cells, monocytes, macrophages, and dendritic cells.</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Common Lymphoid Progenitor Stem Cells (CLPs)</div><div class='def'>Bone marrow stem cells that give rise to adaptive immune cells: B-cells and T-cells.</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Natural Killer (NK) Cells</div><div class='def'>Cytotoxic lymphocytes that come from myeloid progenitor cells but behave like both innate and adaptive immune cells.</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Helper T-Cells</div><div class='def'>T-cells that work with B-cells to initiate the antibody response and trigger macrophages to seek out non-self cells.</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Suppressor T-Cells</div><div class='def'>T-cells that ensure cytotoxic T-cells do not over-produce, keeping the immune response effective but not destructive to normal tissue.</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Cytotoxic T-Cells</div><div class='def'>T-cells, along with NK cells, effective at destroying pathogens inside infected cells.</div></div>
+  <div class='flashcard' data-cat="Immune System Components" onclick="this.classList.toggle('flipped')"><div class='term'>Cell-Mediated Immunity (CMI)</div><div class='def'>Immunity controlled by T-cells and macrophages that can control (but not eliminate) intracellular infections such as herpes virus.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Anaphylaxis</div><div class='def'>The most severe, potentially life-threatening Type I hypersensitivity reaction, which can cause bronchospasm, hypotension, and respiratory failure.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Bronchospasm / Laryngospasm</div><div class='def'>Sudden constriction of the airway smooth muscle (bronchi) or vocal cords (larynx), seen in anaphylaxis.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Epinephrine</div><div class='def'>A medication (e.g., via EpiPen) used to rapidly reverse the effects of anaphylactic shock.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Hypovolemia</div><div class='def'>A decreased volume of circulating blood, monitored via urine output after a hemolytic transfusion reaction.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Dialysis</div><div class='def'>A treatment that may be required to remove mismatched blood from a patient's circulation after a severe transfusion reaction.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Erythroblastosis Fetalis</div><div class='def'>Hemolytic disease of the newborn (HDN) resulting from Rh incompatibility between mother and fetus.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Phototherapy</div><div class='def'>A light-based treatment used for mild cases of neonatal jaundice resulting from Rh incompatibility.</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Exophthalmos</div><div class='def'>Protrusion of the eyeballs, a sign of Grave's disease (an autoimmune cause of hyperthyroidism).</div></div>
+  <div class='flashcard' data-cat="Hypersensitivity & Autoimmune" onclick="this.classList.toggle('flipped')"><div class='term'>Hyperthyroidism</div><div class='def'>Overactive thyroid function, as caused by the autoimmune condition Grave's disease.</div></div>
+  <div class='flashcard' data-cat="Herd Immunity & Behavior" onclick="this.classList.toggle('flipped')"><div class='term'>Abstinence</div><div class='def'>Refraining from sexual activity; one behavioral measure that can prevent transmission of STIs.</div></div>
+  <div class='flashcard' data-cat="Herd Immunity & Behavior" onclick="this.classList.toggle('flipped')"><div class='term'>Infrastructure</div><div class='def'>The underlying systems (e.g., water treatment) that local governments must maintain to prevent contamination of public water supplies.</div></div>
+  <div class='flashcard' data-cat="Herd Immunity & Behavior" onclick="this.classList.toggle('flipped')"><div class='term'>Herd Immunity</div><div class='def'>Community-level protection from disease that occurs when a sufficient percentage of the population is vaccinated, limiting circulation of the pathogen.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Aseptic Techniques</div><div class='def'>Practices used to prevent transmission of microbes and reduce the potential for infection, such as surgical hand scrubs and skin prep.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Bioburden</div><div class='def'>The level of microbial contamination on a surface or instrument prior to decontamination/sterilization.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Irreducible Minimum</div><div class='def'>The lowest achievable level of resident microflora on skin after a surgical scrub; skin can never be made fully sterile.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Lumen</div><div class='def'>The hollow interior channel of an instrument; every surface of a lumen must contact the sterilant for the item to be considered sterile.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Sub-Pathogenic</div><div class='def'>A microbial level reduced to the point where it is unlikely to cause infection — the goal of decontamination.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Decontamination</div><div class='def'>The process of reducing the microbial population on instruments or surfaces to sub-pathogenic levels.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Disinfection</div><div class='def'>The use of chemical agents to kill pathogenic microbes on inanimate objects or surfaces; classified as low-, intermediate-, or high-level.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Sterilization</div><div class='def'>The process of destroying all living microorganisms, including spore-forming bacteria, on critical patient care items.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Electrosurgical Smoke Plume</div><div class='def'>Airborne particulate and gaseous byproduct of electrosurgery that is reduced by OR air exchange systems and HEPA filtration.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Ethylene Oxide (EO)</div><div class='def'>A gas sterilant effective against all microbes (sporicidal) used for heat- and moisture-sensitive items, but flammable, carcinogenic, and toxic, requiring long aeration.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Aeration</div><div class='def'>The process of allowing residual sterilant gas (such as ethylene oxide) to dissipate from items before they can be safely used.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Hydrogen Peroxide Gas Plasma</div><div class='def'>A low-temperature sterilization method using a radiofrequency electrical field to create plasma and free radicals that inactivate microbial life.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Free Radicals</div><div class='def'>Highly reactive molecules generated during hydrogen peroxide gas plasma sterilization that inactivate microbial life.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Radiofrequency</div><div class='def'>The type of electrical field used to create gas plasma during hydrogen peroxide gas plasma sterilization.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Glutaraldehyde</div><div class='def'>A low-temperature liquid chemical used for disinfection/sterilization of heat-sensitive devices that can be immersed.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Peracetic Acid</div><div class='def'>A low-temperature liquid chemical sterilant that can replace glutaraldehyde; corrosive to some metals but generally safe for moisture-stable items.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Biological Indicators (BIs)</div><div class='def'>Devices containing bacterial spores (e.g., Geobacillus stearothermophilus for steam) used to confirm that a sterilization cycle actually killed resistant microorganisms.</div></div>
+  <div class='flashcard' data-cat="Surgical Infection Control" onclick="this.classList.toggle('flipped')"><div class='term'>Chemical Indicators</div><div class='def'>Tapes, strips, or symbols that change color when exposed to a sterilant, providing visual assurance a pack underwent the sterilization process.</div></div>
+  </div>
+</div>
+
+
+<div id="quiz" class="tab-content">
+  <h2>Chapter 21 Quiz</h2>
+  <p class="section-intro">Answer all 10 questions, then click <strong>Check Answers</strong> to see your score and review feedback for each item.</p>
+  <div class="quiz-q" data-qid="q1">
+  <p class="question">1. Which of the following is part of the body's FIRST line of defense?</p>
+  <label><input type="radio" name="q1" value="0" data-correct="false"> The complement cascade</label>
+      <label><input type="radio" name="q1" value="1" data-correct="false"> Interferon production</label>
+      <label><input type="radio" name="q1" value="2" data-correct="true"> Intact skin and mucous membranes</label>
+      <label><input type="radio" name="q1" value="3" data-correct="false"> Antibody production by B-cells</label>
+  <div class="quiz-feedback" id="fb-q1"></div>
+</div>
+<div class="quiz-q" data-qid="q2">
+  <p class="question">2. The process by which a phagocyte's membrane indents and pseudopods extend to surround and entrap a bacterium, forming a phagosome, is called:</p>
+  <label><input type="radio" name="q2" value="0" data-correct="false"> Chemotaxis</label>
+      <label><input type="radio" name="q2" value="1" data-correct="true"> Phagocytosis</label>
+      <label><input type="radio" name="q2" value="2" data-correct="false"> Degranulation</label>
+      <label><input type="radio" name="q2" value="3" data-correct="false"> Complement activation</label>
+  <div class="quiz-feedback" id="fb-q2"></div>
+</div>
+<div class="quiz-q" data-qid="q3">
+  <p class="question">3. Which interleukin is also known as an endogenous pyrogen and aids in activating resting T-cells and the inflammatory response?</p>
+  <label><input type="radio" name="q3" value="0" data-correct="true"> IL-1</label>
+      <label><input type="radio" name="q3" value="1" data-correct="false"> IL-2</label>
+      <label><input type="radio" name="q3" value="2" data-correct="false"> IL-3</label>
+      <label><input type="radio" name="q3" value="3" data-correct="false"> IL-4</label>
+  <div class="quiz-feedback" id="fb-q3"></div>
+</div>
+<div class="quiz-q" data-qid="q4">
+  <p class="question">4. A vaccine made by genetically modifying a weakened pathogen so it is no longer able to cause disease is created through a process called:</p>
+  <label><input type="radio" name="q4" value="0" data-correct="false"> Toxoid formation</label>
+      <label><input type="radio" name="q4" value="1" data-correct="true"> Attenuation</label>
+      <label><input type="radio" name="q4" value="2" data-correct="false"> Agglutination</label>
+      <label><input type="radio" name="q4" value="3" data-correct="false"> Conjugation</label>
+  <div class="quiz-feedback" id="fb-q4"></div>
+</div>
+<div class="quiz-q" data-qid="q5">
+  <p class="question">5. Antibodies that cross the placenta from a pregnant mother to the fetus, or are passed via colostrum to a breastfed infant, are examples of:</p>
+  <label><input type="radio" name="q5" value="0" data-correct="false"> Artificial active immunity</label>
+      <label><input type="radio" name="q5" value="1" data-correct="false"> Natural active immunity</label>
+      <label><input type="radio" name="q5" value="2" data-correct="false"> Artificial passive immunity</label>
+      <label><input type="radio" name="q5" value="3" data-correct="true"> Natural passive immunity</label>
+  <div class="quiz-feedback" id="fb-q5"></div>
+</div>
+<div class="quiz-q" data-qid="q6">
+  <p class="question">6. Which type of hypersensitivity reaction is the most dangerous and life-threatening, involving IgE antibodies and histamine release from mast cells?</p>
+  <label><input type="radio" name="q6" value="0" data-correct="true"> Type I</label>
+      <label><input type="radio" name="q6" value="1" data-correct="false"> Type II</label>
+      <label><input type="radio" name="q6" value="2" data-correct="false"> Type III</label>
+      <label><input type="radio" name="q6" value="3" data-correct="false"> Type IV</label>
+  <div class="quiz-feedback" id="fb-q6"></div>
+</div>
+<div class="quiz-q" data-qid="q7">
+  <p class="question">7. A hemolytic transfusion reaction caused by a blood type mismatch is an example of which type of hypersensitivity reaction?</p>
+  <label><input type="radio" name="q7" value="0" data-correct="false"> Type I</label>
+      <label><input type="radio" name="q7" value="1" data-correct="true"> Type II</label>
+      <label><input type="radio" name="q7" value="2" data-correct="false"> Type III</label>
+      <label><input type="radio" name="q7" value="3" data-correct="false"> Type IV</label>
+  <div class="quiz-feedback" id="fb-q7"></div>
+</div>
+<div class="quiz-q" data-qid="q8">
+  <p class="question">8. Approximately what percentage of a community must be vaccinated against measles for herd immunity to be effective?</p>
+  <label><input type="radio" name="q8" value="0" data-correct="false"> 50%</label>
+      <label><input type="radio" name="q8" value="1" data-correct="false"> 75%</label>
+      <label><input type="radio" name="q8" value="2" data-correct="false"> 85%</label>
+      <label><input type="radio" name="q8" value="3" data-correct="true"> 95%</label>
+  <div class="quiz-feedback" id="fb-q8"></div>
+</div>
+<div class="quiz-q" data-qid="q9">
+  <p class="question">9. Which classification of patient care items includes surgical instruments that access the bloodstream and must be sterilized?</p>
+  <label><input type="radio" name="q9" value="0" data-correct="false"> Non-critical</label>
+      <label><input type="radio" name="q9" value="1" data-correct="false"> Semi-critical</label>
+      <label><input type="radio" name="q9" value="2" data-correct="true"> Critical</label>
+      <label><input type="radio" name="q9" value="3" data-correct="false"> Environmental</label>
+  <div class="quiz-feedback" id="fb-q9"></div>
+</div>
+<div class="quiz-q" data-qid="q10">
+  <p class="question">10. Which biological indicator organism is used to test steam sterilization because it is highly resistant to steam but harmless to humans?</p>
+  <label><input type="radio" name="q10" value="0" data-correct="false"> Bacillus atrophaeus</label>
+      <label><input type="radio" name="q10" value="1" data-correct="true"> Geobacillus stearothermophilus</label>
+      <label><input type="radio" name="q10" value="2" data-correct="false"> Clostridioides difficile</label>
+      <label><input type="radio" name="q10" value="3" data-correct="false"> Mycobacterium tuberculosis</label>
+  <div class="quiz-feedback" id="fb-q10"></div>
+</div>
+  <button id="submit-quiz" onclick="checkQuiz()">Check Answers</button>
+  <div id="quiz-score"></div>
+</div>
+
+
+<footer>
+  Microbiology for Surgical Technologists, 3rd Ed. (Rodriguez) &middot; Chapter 21 Study Guide &middot; ATA College Surgical Technology Program &middot; Pablo Pereira, CST Instructor
+</footer>
+
+<script>
+function showTab(id, btn) {
+  var contents = document.getElementsByClassName('tab-content');
+  for (var i = 0; i < contents.length; i++) {
+    contents[i].classList.remove('active');
+  }
+  var buttons = document.querySelectorAll('.tab-bar button');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove('active');
+  }
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function filterCards() {
+  var val = document.getElementById('cat-filter').value;
+  var cards = document.getElementsByClassName('flashcard');
+  for (var i = 0; i < cards.length; i++) {
+    if (val === 'all' || cards[i].getAttribute('data-cat') === val) {
+      cards[i].style.display = 'flex';
+    } else {
+      cards[i].style.display = 'none';
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var headers = document.getElementsByClassName('accordion-header');
+  for (var i = 0; i < headers.length; i++) {
+    headers[i].addEventListener('click', function () {
+      this.classList.toggle('open');
+      var body = this.nextElementSibling;
+      body.classList.toggle('open');
+    });
+  }
+});
+
+function checkQuiz() {
+  var questions = document.querySelectorAll('.quiz-q');
+  var score = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var qid = questions[i].getAttribute('data-qid');
+    var radios = document.getElementsByName(qid);
+    var fb = document.getElementById('fb-' + qid);
+    var selected = null;
+    var correctValue = null;
+    for (var j = 0; j < radios.length; j++) {
+      if (radios[j].getAttribute('data-correct') === 'true') {
+        correctValue = radios[j].value;
+      }
+      if (radios[j].checked) {
+        selected = radios[j];
+      }
+    }
+    fb.className = 'quiz-feedback show';
+    if (selected === null) {
+      fb.classList.add('no');
+      fb.innerHTML = 'No answer selected. The correct answer is option ' + (parseInt(correctValue) + 1) + '.';
+    } else if (selected.getAttribute('data-correct') === 'true') {
+      score++;
+      fb.classList.add('ok');
+      fb.innerHTML = 'Correct!';
+    } else {
+      fb.classList.add('no');
+      fb.innerHTML = 'Incorrect. The correct answer is option ' + (parseInt(correctValue) + 1) + '.';
+    }
+  }
+  var scoreDiv = document.getElementById('quiz-score');
+  scoreDiv.style.display = 'block';
+  scoreDiv.innerHTML = 'Score: ' + score + ' / ' + questions.length;
+}
+</script>
+</body>
+</html>
